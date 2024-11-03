@@ -1,14 +1,10 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
-import SideBar from './components/SideBar';
-import AddTask from './components/AddTask';
+import AppRouter from './config/AppRouter';
 
 function App() {
   return (
-    <div className="App flex overflow-hidden">
-      <SideBar />
-      <AddTask />
-    </div>
+   <AppRouter />
   );
 }
 

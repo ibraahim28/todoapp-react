@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-export default function AddTask() {
+export default function AddTask({ todoArr, setTodoArr }) {
   const [todo, setTodo] = useState("");
-  const [todoArr, setTodoArr] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
   const [editText, setEditText] = useState("");
 
@@ -56,8 +55,12 @@ export default function AddTask() {
     setEditText("");
   };
 
+  const handleDelete = (e) => {
+    setTodoArr(todoArr.filter((item) => item.id !== e.id));
+  };
+
   return (
-    <div className="overflow-y-scroll py-3 px-20 bg-[#131313] flex flex-col gap-16 text-left w-4/5 h-screen p-10 text-white">
+    <div className="overflow-y-auto py-3 px-20 bg-[#131313] flex flex-col gap-16 text-left w-4/5 h-screen p-10 text-white">
       <div>
         <h1 className="text-5xl p-2 font-bold">Good Afternoon.</h1>
         <h1 className="text-3xl text-zinc-400 font-bold ">
@@ -105,7 +108,7 @@ export default function AddTask() {
                   <div className="flex gap-2 items-center w-full">
                     <input
                       type="checkbox"
-                      value={item.completed}
+                      checked={item.completed}
                       onChange={() => handleCheckbox(item.id)}
                       className="cursor-pointer"
                     />
@@ -118,14 +121,18 @@ export default function AddTask() {
                     </p>
                   </div>
                   <div className="flex gap-3">
-                    
                     <button
                       onClick={() => handleEditToggle(item)}
                       className="bg-[#f5c76b] px-4 py-2 text-black rounded-md text-sm"
                     >
                       Edit
                     </button>
-                    <button className="bg-[#f5c76b] px-4  py-2 text-black rounded-md text-sm">
+                    <button
+                      onClick={() => {
+                        handleDelete(item);
+                      }}
+                      className="bg-[#f5c76b] px-4  py-2 text-black rounded-md text-sm"
+                    >
                       Delete
                     </button>
                   </div>
